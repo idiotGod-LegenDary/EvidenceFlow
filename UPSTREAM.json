@@ -1,0 +1,24 @@
+{
+  "repository": "https://github.com/JEen-wang/Adaptive-rag",
+  "commit": "2a12a62382a8c3ec033fa9a5b19b9b23b8780ab8",
+  "archive_sha256": "70ad2fb11aa3f7e8f0b14ff1829db5f4f9487c85c56a2e7673037f567312e07e",
+  "download_date": "2026-11-21",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 JEen-wang",
+  "local_changes": [
+    "app/retrieval/knowledge.py and snapshot integration",
+    "app/services/case_service.py and case persistence/API",
+    "app/business/dialogue.py, dialogue state persistence and policy citation propagation",
+    "alembic/versions/0004_dialogue_states.py",
+    "eval/p0_dataset.py, p0_runner.py, p0_compare.py and frozen application comparisons",
+    "app/business/orders.py and injectable order gateway",
+    "eval/service_dataset.py, service_benchmark.py and compare_service_runs.py",
+    "app/observability/trace.py and provider/tool evaluation tracing",
+    "alembic/versions/0003_service_cases.py",
+    "frontend/src/Workbench.tsx and case panel",
+    "app/skills/definitions/refund_handling.json",
+    "knowledge/售后操作规则.md",
+    "tests, CI, runtime scripts and project documentation"
+  ],
+  "note": "Source ZIP snapshot, not a Git clone. No remote fork, push or publication was performed."
+}

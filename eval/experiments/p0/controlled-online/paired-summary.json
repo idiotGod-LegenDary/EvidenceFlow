@@ -1,0 +1,89 @@
+{
+  "complete_pairs": 14,
+  "unique_tasks_in_pairs": 8,
+  "excluded_budget_interrupted_trials": 1,
+  "variants": {
+    "baseline": {
+      "passed": 7,
+      "wrong_proposals": 0,
+      "wrong_executions": 0,
+      "model_http_attempts": 130,
+      "prompt_tokens": 72131,
+      "completion_tokens": 13853,
+      "planned_trials": 24,
+      "attempted_trials": 15,
+      "complete_trials": 14,
+      "unrun_trials": 9
+    },
+    "full": {
+      "passed": 13,
+      "wrong_proposals": 0,
+      "wrong_executions": 0,
+      "model_http_attempts": 84,
+      "prompt_tokens": 50537,
+      "completion_tokens": 8708,
+      "planned_trials": 24,
+      "attempted_trials": 16,
+      "complete_trials": 16,
+      "unrun_trials": 8
+    }
+  },
+  "task_repeat_pairs": [
+    [
+      "application_word_question_01",
+      0
+    ],
+    [
+      "choice_cancel_01",
+      0
+    ],
+    [
+      "choice_cancel_01",
+      1
+    ],
+    [
+      "choice_refund_01",
+      0
+    ],
+    [
+      "choice_refund_01",
+      1
+    ],
+    [
+      "consult_then_cancel_01",
+      0
+    ],
+    [
+      "consult_then_cancel_01",
+      1
+    ],
+    [
+      "consult_then_return_01",
+      0
+    ],
+    [
+      "consult_then_return_01",
+      1
+    ],
+    [
+      "read_consult_execute_01",
+      0
+    ],
+    [
+      "refund_number_later_01",
+      0
+    ],
+    [
+      "refund_number_later_01",
+      1
+    ],
+    [
+      "selection_deferred_01",
+      0
+    ],
+    [
+      "selection_deferred_01",
+      1
+    ]
+  ]
+}

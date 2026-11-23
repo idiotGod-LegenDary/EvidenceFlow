@@ -1,0 +1,11 @@
+{
+  "archive_application_hashes": {
+    "baseline": "289797068821080a8f31cce9e82acd81a6d62a539bbb3079273ed233aee5e618",
+    "full": "a433f85f76e59aec252f1e8c081e972a59cebf02b4d643e6df72d90e44dc4761"
+  },
+  "worker_application_hashes_verified": true,
+  "runtime_settings_and_policy_fixtures_match": true,
+  "final_application_sha256": "00e3105bb8773aaeb8e3bf5c91efa1ff65488a30bc51c59de85f9a65af490a65",
+  "final_archive_sha256": "29b356c4e7d1fcab73f4c960a592b02b539fdf2c39902146885ecfd4d4bc5eef",
+  "final_regression_source_verified": true
+}

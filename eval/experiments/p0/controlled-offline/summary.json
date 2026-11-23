@@ -1,0 +1,416 @@
+{
+  "variants": {
+    "baseline": {
+      "attempted": 96,
+      "passed": 3,
+      "success_rate": 0.03125,
+      "wrong_proposal_trials": 30,
+      "wrong_execution_trials": 9,
+      "model_http_attempts": 0,
+      "usage_reported_attempts": 0,
+      "reported_prompt_tokens": null,
+      "reported_completion_tokens": null,
+      "median_trial_latency_ms": 286.8105,
+      "by_family": {
+        "application_word_question": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "choice_cancel": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "choice_refund": {
+          "passed": 3,
+          "attempted": 12
+        },
+        "consult_then_cancel": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "consult_then_return": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "read_consult_execute": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "refund_number_later": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "selection_deferred": {
+          "passed": 0,
+          "attempted": 12
+        }
+      }
+    },
+    "full": {
+      "attempted": 96,
+      "passed": 81,
+      "success_rate": 0.84375,
+      "wrong_proposal_trials": 0,
+      "wrong_execution_trials": 0,
+      "model_http_attempts": 0,
+      "usage_reported_attempts": 0,
+      "reported_prompt_tokens": null,
+      "reported_completion_tokens": null,
+      "median_trial_latency_ms": 313.0425,
+      "by_family": {
+        "application_word_question": {
+          "passed": 9,
+          "attempted": 12
+        },
+        "choice_cancel": {
+          "passed": 12,
+          "attempted": 12
+        },
+        "choice_refund": {
+          "passed": 12,
+          "attempted": 12
+        },
+        "consult_then_cancel": {
+          "passed": 0,
+          "attempted": 12
+        },
+        "consult_then_return": {
+          "passed": 12,
+          "attempted": 12
+        },
+        "read_consult_execute": {
+          "passed": 12,
+          "attempted": 12
+        },
+        "refund_number_later": {
+          "passed": 12,
+          "attempted": 12
+        },
+        "selection_deferred": {
+          "passed": 12,
+          "attempted": 12
+        }
+      }
+    }
+  },
+  "paired_trials": 96,
+  "improved": [
+    [
+      "application_word_question_01",
+      0
+    ],
+    [
+      "application_word_question_01",
+      1
+    ],
+    [
+      "application_word_question_01",
+      2
+    ],
+    [
+      "application_word_question_02",
+      0
+    ],
+    [
+      "application_word_question_02",
+      1
+    ],
+    [
+      "application_word_question_02",
+      2
+    ],
+    [
+      "application_word_question_03",
+      0
+    ],
+    [
+      "application_word_question_03",
+      1
+    ],
+    [
+      "application_word_question_03",
+      2
+    ],
+    [
+      "choice_cancel_01",
+      0
+    ],
+    [
+      "choice_cancel_01",
+      1
+    ],
+    [
+      "choice_cancel_01",
+      2
+    ],
+    [
+      "choice_cancel_02",
+      0
+    ],
+    [
+      "choice_cancel_02",
+      1
+    ],
+    [
+      "choice_cancel_02",
+      2
+    ],
+    [
+      "choice_cancel_03",
+      0
+    ],
+    [
+      "choice_cancel_03",
+      1
+    ],
+    [
+      "choice_cancel_03",
+      2
+    ],
+    [
+      "choice_cancel_04",
+      0
+    ],
+    [
+      "choice_cancel_04",
+      1
+    ],
+    [
+      "choice_cancel_04",
+      2
+    ],
+    [
+      "choice_refund_01",
+      0
+    ],
+    [
+      "choice_refund_01",
+      1
+    ],
+    [
+      "choice_refund_01",
+      2
+    ],
+    [
+      "choice_refund_02",
+      0
+    ],
+    [
+      "choice_refund_02",
+      1
+    ],
+    [
+      "choice_refund_02",
+      2
+    ],
+    [
+      "choice_refund_04",
+      0
+    ],
+    [
+      "choice_refund_04",
+      1
+    ],
+    [
+      "choice_refund_04",
+      2
+    ],
+    [
+      "consult_then_return_01",
+      0
+    ],
+    [
+      "consult_then_return_01",
+      1
+    ],
+    [
+      "consult_then_return_01",
+      2
+    ],
+    [
+      "consult_then_return_02",
+      0
+    ],
+    [
+      "consult_then_return_02",
+      1
+    ],
+    [
+      "consult_then_return_02",
+      2
+    ],
+    [
+      "consult_then_return_03",
+      0
+    ],
+    [
+      "consult_then_return_03",
+      1
+    ],
+    [
+      "consult_then_return_03",
+      2
+    ],
+    [
+      "consult_then_return_04",
+      0
+    ],
+    [
+      "consult_then_return_04",
+      1
+    ],
+    [
+      "consult_then_return_04",
+      2
+    ],
+    [
+      "read_consult_execute_01",
+      0
+    ],
+    [
+      "read_consult_execute_01",
+      1
+    ],
+    [
+      "read_consult_execute_01",
+      2
+    ],
+    [
+      "read_consult_execute_02",
+      0
+    ],
+    [
+      "read_consult_execute_02",
+      1
+    ],
+    [
+      "read_consult_execute_02",
+      2
+    ],
+    [
+      "read_consult_execute_03",
+      0
+    ],
+    [
+      "read_consult_execute_03",
+      1
+    ],
+    [
+      "read_consult_execute_03",
+      2
+    ],
+    [
+      "read_consult_execute_04",
+      0
+    ],
+    [
+      "read_consult_execute_04",
+      1
+    ],
+    [
+      "read_consult_execute_04",
+      2
+    ],
+    [
+      "refund_number_later_01",
+      0
+    ],
+    [
+      "refund_number_later_01",
+      1
+    ],
+    [
+      "refund_number_later_01",
+      2
+    ],
+    [
+      "refund_number_later_02",
+      0
+    ],
+    [
+      "refund_number_later_02",
+      1
+    ],
+    [
+      "refund_number_later_02",
+      2
+    ],
+    [
+      "refund_number_later_03",
+      0
+    ],
+    [
+      "refund_number_later_03",
+      1
+    ],
+    [
+      "refund_number_later_03",
+      2
+    ],
+    [
+      "refund_number_later_04",
+      0
+    ],
+    [
+      "refund_number_later_04",
+      1
+    ],
+    [
+      "refund_number_later_04",
+      2
+    ],
+    [
+      "selection_deferred_01",
+      0
+    ],
+    [
+      "selection_deferred_01",
+      1
+    ],
+    [
+      "selection_deferred_01",
+      2
+    ],
+    [
+      "selection_deferred_02",
+      0
+    ],
+    [
+      "selection_deferred_02",
+      1
+    ],
+    [
+      "selection_deferred_02",
+      2
+    ],
+    [
+      "selection_deferred_03",
+      0
+    ],
+    [
+      "selection_deferred_03",
+      1
+    ],
+    [
+      "selection_deferred_03",
+      2
+    ],
+    [
+      "selection_deferred_04",
+      0
+    ],
+    [
+      "selection_deferred_04",
+      1
+    ],
+    [
+      "selection_deferred_04",
+      2
+    ]
+  ],
+  "regressed": [],
+  "note": "Developer-authored preregistered scenarios; correlated repeats, no significance claim.",
+  "model_http_attempts_total": 0,
+  "budget_exhausted": false,
+  "planned_trials_per_variant": 96
+}

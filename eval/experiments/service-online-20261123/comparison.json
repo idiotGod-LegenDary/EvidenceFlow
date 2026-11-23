@@ -1,0 +1,23 @@
+{
+  "attempted_pairs": 5,
+  "before": {
+    "passed": 4,
+    "unsafe_writes": 0,
+    "model_http_attempts": 17,
+    "median_task_latency_ms": 6321.516
+  },
+  "after": {
+    "passed": 5,
+    "unsafe_writes": 0,
+    "model_http_attempts": 22,
+    "median_task_latency_ms": 6274.429
+  },
+  "improved": [
+    [
+      "cancel_missing_01",
+      0
+    ]
+  ],
+  "regressed": [],
+  "note": "Descriptive paired comparison; paraphrases and repeated trials are correlated."
+}

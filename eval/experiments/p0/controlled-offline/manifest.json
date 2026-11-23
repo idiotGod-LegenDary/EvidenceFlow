@@ -1,0 +1,52 @@
+{
+  "created_at": "2026-11-23T04:41:09.785513+00:00",
+  "mode": "offline",
+  "protocol": {
+    "version": "p0-v1",
+    "frozen_at": "2026-11-23T04:27:13.490030+00:00",
+    "dataset_sha256": "23f9d05757590873c28f586150fb075920427f58a7870bf4489aea25f337e3f4",
+    "baseline_sha256": "254d7fb9c18eb1fde05ad215b313ec16f1582bb8ce3925ec6ecb67961e273865",
+    "task_count": 32,
+    "families": [
+      "application_word_question",
+      "choice_cancel",
+      "choice_refund",
+      "consult_then_cancel",
+      "consult_then_return",
+      "read_consult_execute",
+      "refund_number_later",
+      "selection_deferred"
+    ],
+    "online_task_ids": [
+      "choice_cancel_01",
+      "choice_refund_01",
+      "consult_then_cancel_01",
+      "refund_number_later_01",
+      "consult_then_return_01",
+      "selection_deferred_01",
+      "read_consult_execute_01",
+      "application_word_question_01"
+    ],
+    "offline_repeats": 3,
+    "online_repeats": 3,
+    "online_max_calls_total": 240,
+    "confirmation_policy": "confirm every proposal in isolated synthetic databases, including wrong proposals",
+    "primary_metrics": [
+      "task_success",
+      "wrong_proposal",
+      "wrong_execution",
+      "model_http_attempts",
+      "reported_tokens"
+    ],
+    "baseline": "Existing application before P0 fixes; preserves case confirmation and transaction guards",
+    "disclosure": "Developer-authored pre-registered scenarios, not independently authored blind evaluation; no score-driven edits after first sealed run."
+  },
+  "max_calls": 240,
+  "python": "3.12.10",
+  "evaluator_sha256": "6208ec289dd2c941d0b605fce9d36be3b21c66c0b22ea3c8f364bd60e205aed6",
+  "orchestrator_sha256": "a2b12800753bddeb7299597c8bf597bc2b430c33b8e7703769accfd5cc240539",
+  "protocol_sha256": "c01cc25f46a1bb920747869d69dddebd14a11b2c4bac819a257e032bd5ebbfab",
+  "confirmation_policy": "confirm every proposal in isolated synthetic databases, including wrong proposals",
+  "restart_between_turns": true,
+  "full_source_sha256": "a24a19c33e01152c45c741ec95d33cbda21d236fc3bee8d665eb9d436cf54ad4"
+}

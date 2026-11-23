@@ -1,0 +1,13 @@
+{
+  "frozen_at": "2026-11-23T04:40:48.970079+00:00",
+  "files": {
+    "eval/p0_runner.py": "6208ec289dd2c941d0b605fce9d36be3b21c66c0b22ea3c8f364bd60e205aed6",
+    "eval/p0_compare.py": "a2b12800753bddeb7299597c8bf597bc2b430c33b8e7703769accfd5cc240539",
+    "eval/service_benchmark.py": "9b03f0d3311fb35f2d9163ab446093b599d507b4bfe1e6678d95cc7e7d01d78e",
+    "eval/p0_dataset.py": "5aa3331c0bbeec5288658923b0f9934de6b59fd08108d31aa3104a3d01f0c610",
+    "eval/service_dataset.py": "0f0b9b03b5dc5c5637538328fe27e4d266fb6e9964690a6e453c19f522cfca92"
+  },
+  "restart_between_turns": true,
+  "policy_grading": "Published catalog chunk IDs, body SHA and version; no semantic quality claim",
+  "wrong_proposal_probe": "Confirm every proposal, even if tool or order mismatches gold, only in fresh synthetic database"
+}

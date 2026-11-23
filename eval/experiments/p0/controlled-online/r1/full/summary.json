@@ -1,0 +1,33 @@
+{
+  "application_sha256": "a433f85f76e59aec252f1e8c081e972a59cebf02b4d643e6df72d90e44dc4761",
+  "settings": {
+    "deepseek_model": "deepseek-flash",
+    "deepseek_thinking": "disabled",
+    "llm_timeout_seconds": 30.0,
+    "llm_max_retries": 3,
+    "embedding_dim": 512,
+    "retrieval_top_k_simple": 3,
+    "retrieval_top_k_complex": 8,
+    "rerank_top_n": 5,
+    "max_retrieval_hops": 3,
+    "rrf_k": 60,
+    "max_agent_steps": 8,
+    "max_tool_calls": 6
+  },
+  "fixture_sha256": "083b2824654f262471b36bdc4374bb4c9f7eaac7558c9cf80e771f3d587fdc7d",
+  "variant": "full",
+  "repeat": 1,
+  "selected": 8,
+  "attempted": 8,
+  "unrun": 0,
+  "passed": 7,
+  "wrong_proposals": 0,
+  "wrong_executions": 0,
+  "model_http_attempts": 51,
+  "usage_reported_attempts": 51,
+  "reported_prompt_tokens": 28243,
+  "reported_completion_tokens": 5013,
+  "actual_models": [
+    "deepseek-flash"
+  ]
+}

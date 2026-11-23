@@ -1,0 +1,70 @@
+{
+  "source_sha256": "e875910214ba6d20de69b500d4599e196dc4ca94898c5d4faaa446d59a9c2a7c",
+  "python_version": "3.12.10",
+  "dataset_sha256": "2dd5b0b9bccde46ed8c990e13e6f931ad7fe73eb35166d32624e9f8df32e159f",
+  "fixture_sha256": "083b2824654f262471b36bdc4374bb4c9f7eaac7558c9cf80e771f3d587fdc7d",
+  "mode": "online",
+  "split": "dev",
+  "repeats": 1,
+  "limit": 5,
+  "max_calls": 23,
+  "timeout_seconds": 120,
+  "requested_model": "deepseek-flash",
+  "thinking": "disabled",
+  "retrieval": {
+    "embedding": "hash",
+    "reranker": "lexical",
+    "policies": "synthetic_frozen"
+  },
+  "runtime_limits": {
+    "max_agent_steps": 8,
+    "max_tool_calls": 6,
+    "llm_timeout_seconds": 30.0,
+    "llm_max_retries": 3,
+    "token_budget": 128000,
+    "embedding_dim": 512,
+    "retrieval_top_k_simple": 3,
+    "retrieval_top_k_complex": 8,
+    "rerank_top_n": 5,
+    "max_retrieval_hops": 3,
+    "rrf_k": 60
+  },
+  "input_price_per_million": null,
+  "output_price_per_million": null,
+  "currency": "unspecified",
+  "created_at": "2026-11-23T04:05:30.258770+00:00",
+  "oracle_version": "service-state-v1",
+  "measurement": "online_task_evaluation",
+  "selected": 5,
+  "attempted": 5,
+  "unrun": 0,
+  "passed": 5,
+  "success_rate": 1.0,
+  "unsafe_writes": 0,
+  "by_goal": {
+    "clarify": {
+      "passed": 1,
+      "total": 1
+    },
+    "execute": {
+      "passed": 3,
+      "total": 3
+    },
+    "policy": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "failed_checks": {},
+  "model_http_attempts": 22,
+  "usage_reported_attempts": 22,
+  "failed_model_attempts": 0,
+  "tasks_with_output_errors": 0,
+  "reported_prompt_tokens": 10181,
+  "reported_completion_tokens": 2024,
+  "actual_models": [
+    "deepseek-flash"
+  ],
+  "estimated_cost": null,
+  "median_task_latency_ms": 6274.429
+}

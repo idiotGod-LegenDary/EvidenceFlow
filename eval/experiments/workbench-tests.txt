@@ -1,0 +1,85 @@
+........................................................................ [ 37%]
+........................................................................ [ 75%]
+................................................                         [100%]
+============================== warnings summary ===============================
+..\.tools\python312\Lib\site-packages\langgraph\checkpoint\base\__init__.py:18
+  D:\剑指\projects\.tools\python312\Lib\site-packages\langgraph\checkpoint\base\__init__.py:18: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+    from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.10-final-0 _______________
+
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+app\agents\nodes\executor.py               100     60    40%
+app\agents\nodes\faithfulness.py            50     22    56%
+app\agents\nodes\generate.py               104     54    48%
+app\agents\nodes\intent.py                  50     10    80%
+app\agents\nodes\intent_overlay.py          75      6    92%
+app\agents\nodes\memory.py                  19      2    89%
+app\agents\nodes\planner.py                131     41    69%
+app\agents\nodes\retrieval.py               29      2    93%
+app\api\routes\admin.py                     34      4    88%
+app\api\routes\health.py                    48     20    58%
+app\asgi.py                                  2      2     0%
+app\cli\__main__.py                          3      3     0%
+app\cli\client.py                          166    141    15%
+app\cli\commands.py                         24     16    33%
+app\cli\render.py                           47     17    64%
+app\config\settings.py                      85      1    99%
+app\core\exceptions.py                      48      4    92%
+app\core\request_scope.py                   18      1    94%
+app\core\retry.py                           37     10    73%
+app\guardrails\boundary.py                  11      2    82%
+app\guardrails\hallucination.py             21      2    90%
+app\infra\rate_limit.py                     46     19    59%
+app\infra\redis_client.py                   15      8    47%
+app\main.py                                 81      8    90%
+app\mcp\adapter.py                          31      1    97%
+app\mcp\runtime.py                          24     14    42%
+app\memory\budget.py                        26      2    92%
+app\memory\compression.py                   36      2    94%
+app\memory\summarizer.py                    16      7    56%
+app\observability\logging.py                27      2    93%
+app\providers\deepseek.py                   86     69    20%
+app\providers\device.py                     14     12    14%
+app\providers\embeddings.py                156     62    60%
+app\providers\fake.py                       25      4    84%
+app\providers\json_parser.py                36      9    75%
+app\providers\reranker.py                   80     23    71%
+app\repositories\db.py                      27      7    74%
+app\repositories\idempotency.py             22      5    77%
+app\repositories\order_repository.py        95     28    71%
+app\repositories\session_repository.py      32      4    88%
+app\retrieval\adaptive.py                   47     12    74%
+app\retrieval\bm25.py                       34      4    88%
+app\retrieval\cache.py                      62      1    98%
+app\retrieval\chunking.py                   59     10    83%
+app\retrieval\cleaning.py                   70      2    97%
+app\retrieval\fusion.py                     22      1    95%
+app\retrieval\hybrid.py                     69      7    90%
+app\retrieval\ingest.py                     64     17    73%
+app\retrieval\knowledge.py                 127      3    98%
+app\retrieval\reranker.py                   19      1    95%
+app\retrieval\unstructured_parser.py       160     28    82%
+app\retrieval\vector.py                     96     30    69%
+app\services\case_service.py               204     10    95%
+app\services\chat_service.py               154     22    86%
+app\services\container.py                   76      4    95%
+app\skills\loader.py                        25      2    92%
+app\tools\aftersale_tools.py                46      3    93%
+app\tools\base.py                           41      4    90%
+app\tools\knowledge_tools.py                44      5    89%
+app\tools\logistics_tools.py                23      9    61%
+app\tools\order_tools.py                    23      3    87%
+app\tools\product_tools.py                  50     13    74%
+app\tools\registry.py                       19      4    79%
+eval\knowledge_lifecycle.py                 87     87     0%
+eval\runner.py                             341    249    27%
+------------------------------------------------------------
+TOTAL                                     4850   1237    74%
+
+63 files skipped due to complete coverage.
+Required test coverage of 70% reached. Total coverage: 74.49%
+192 passed, 1 warning in 48.35s
