@@ -1,5 +1,6 @@
 {
   "repository": "https://github.com/JEen-wang/Adaptive-rag",
+  "project_repository": "https://github.com/idiotGod-LegenDary/EvidenceFlow",
   "commit": "2a12a62382a8c3ec033fa9a5b19b9b23b8780ab8",
   "archive_sha256": "70ad2fb11aa3f7e8f0b14ff1829db5f4f9487c85c56a2e7673037f567312e07e",
   "download_date": "2026-11-21",
@@ -20,5 +21,5 @@
     "knowledge/售后操作规则.md",
     "tests, CI, runtime scripts and project documentation"
   ],
-  "note": "Source ZIP snapshot, not a Git clone. No remote fork, push or publication was performed."
+  "note": "Upstream imported from a source ZIP at the recorded commit. Local changes are maintained in the project repository; the original MIT attribution is retained."
 }
