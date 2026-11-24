@@ -1,29 +1,17 @@
-"""Tool base classes and execution context."""
-
 from __future__ import annotations
 
-from typing import Any, Protocol
+from typing import Protocol
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, Field, ValidationError
 
 from app.core.enums import ToolRisk
-from app.core.exceptions import InvalidRequestError, ToolExecutionError
+from app.core.exceptions import AppError, InvalidRequestError, ToolExecutionError
 from app.observability.trace import tool_span
 from app.schemas.agent import ToolResult
 
 
 class ToolContext(BaseModel):
-    """Per-call context passed to every tool.
-
-    Attributes:
-        user_id: Owner of the conversation; scopes data access.
-        session_id: Conversation session the call belongs to.
-        trace_id: Correlation id shared across the request.
-        confirmed_action_id: Set once a human has confirmed a write action.
-        idempotency_key: Deduplication key so a retried write runs once.
-    """
-
-    user_id: str
+    user_id: str = Field(min_length=1)
     session_id: str
     trace_id: str
     confirmed_action_id: str | None = None
@@ -31,68 +19,47 @@ class ToolContext(BaseModel):
 
 
 class BaseTool(Protocol):
-    """Structural contract every tool must satisfy."""
-
     name: str
-    description: str
     risk: ToolRisk
     input_model: type[BaseModel]
 
-    async def execute(self, arguments: dict[str, Any], context: ToolContext) -> ToolResult:
-        """Run the tool against raw arguments and return a structured result."""
-        ...
+    async def run(self, arguments: dict, context: ToolContext) -> ToolResult: ...
 
 
 class Tool:
-    """Base class for concrete tools.
-
-    Subclasses declare ``name``, ``description``, ``risk`` and ``input_model``,
-    then implement :meth:`execute`. The base class validates arguments and wraps
-    unexpected failures into :class:`ToolExecutionError` so the graph can degrade
-    gracefully instead of crashing the turn.
-    """
-
     name: str
     description: str
-    risk: ToolRisk = ToolRisk.READ
     input_model: type[BaseModel]
+    risk = ToolRisk.READ
 
-    def parse(self, arguments: dict[str, Any]) -> BaseModel:
-        """Validate raw arguments against ``input_model``.
-
-        Raises:
-            InvalidRequestError: If the arguments do not match the schema.
-        """
+    def parse(self, arguments: dict) -> BaseModel:
         try:
             return self.input_model.model_validate(arguments)
-        except ValidationError as exc:
-            raise InvalidRequestError(f"invalid arguments for {self.name}: {exc}") from exc
+        except ValidationError as error:
+            raise InvalidRequestError(f"{self.name} 的参数不符合约束。") from error
 
-    async def run(self, arguments: dict[str, Any], context: ToolContext) -> ToolResult:
-        """Validate, then execute, mapping unexpected errors to a tool failure."""
-        with tool_span(self.name, arguments) as record:
-            parsed = self.parse(arguments)
+    async def run(self, arguments: dict, context: ToolContext) -> ToolResult:
+        with tool_span(self.name, arguments) as event:
+            payload = self.parse(arguments)
             try:
-                result = await self.execute(parsed, context)
-                record.update(success=result.success, output=result.output)
-                return result
-            except InvalidRequestError:
+                receipt = await self.execute(payload, context)
+            except AppError:
                 raise
-            except Exception as exc:
-                raise ToolExecutionError(f"{self.name} failed") from exc
+            except Exception as error:
+                raise ToolExecutionError(f"{self.name} 执行失败。") from error
+            event["success"] = receipt.success
+            event["output"] = receipt.output
+            return receipt
 
     async def execute(self, parsed: BaseModel, context: ToolContext) -> ToolResult:
-        """Perform the tool's work. Subclasses must override this."""
-        raise NotImplementedError
+        raise NotImplementedError(self.name)
 
-    def openai_schema(self) -> dict[str, Any]:
-        """Return the OpenAI function-calling schema for this tool."""
-        schema = self.input_model.model_json_schema()
+    def openai_schema(self) -> dict:
         return {
             "type": "function",
             "function": {
                 "name": self.name,
                 "description": self.description,
-                "parameters": schema,
+                "parameters": self.input_model.model_json_schema(),
             },
         }

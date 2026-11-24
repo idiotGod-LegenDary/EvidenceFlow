@@ -6,7 +6,8 @@
   "download_date": "2026-11-21",
   "license": "MIT",
   "copyright": "Copyright (c) 2026 JEen-wang",
-  "local_changes": [
+  "note": "Source ZIP import retained for historical provenance and MIT attribution. Version 0.2 replaces the request runtime and selected core components; retained infrastructure and adapter code remains attributed. This record does not claim a clean-room rewrite of the entire repository.",
+  "historical_extensions": [
     "app/retrieval/knowledge.py and snapshot integration",
     "app/services/case_service.py and case persistence/API",
     "app/business/dialogue.py, dialogue state persistence and policy citation propagation",
@@ -21,5 +22,33 @@
     "knowledge/售后操作规则.md",
     "tests, CI, runtime scripts and project documentation"
   ],
-  "note": "Upstream imported from a source ZIP at the recorded commit. Local changes are maintained in the project repository; the original MIT attribution is retained."
+  "runtime_rewrite": {
+    "project_version": "0.2.0",
+    "date": "2026-11-24",
+    "new_runtime": "app/runtime/",
+    "replaced": [
+      "app/services/chat_service.py",
+      "app/tools/base.py",
+      "app/tools/registry.py",
+      "app/retrieval/hybrid.py",
+      "app/retrieval/fusion.py"
+    ],
+    "retired": [
+      "app/agents/",
+      "app/skills/",
+      "app/memory/",
+      "app/prompts/",
+      "app/retrieval/adaptive.py",
+      "app/retrieval/query_rewrite.py",
+      "app/retrieval/self_rag.py",
+      "app/guardrails/hallucination.py"
+    ],
+    "pre_rewrite_snapshot": {
+      "path": "eval/baselines/pre_independent_runtime.zip",
+      "sha256": "caf79c94a49ef9fbc189a272d03e253a7106d2fcdd4a690a1c54445bce4ae360"
+    },
+    "retained_component_scope": "THIRD_PARTY_NOTICES.md",
+    "source_audit": "eval/experiments/runtime-v2/source-audit.json",
+    "default_legacy_framework_dependencies": false
+  }
 }

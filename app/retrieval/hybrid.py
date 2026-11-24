@@ -1,9 +1,6 @@
-"""Hybrid retriever fusing BM25 and dense vectors with RRF."""
-
 from __future__ import annotations
 
-import logging
-import time
+import asyncio
 from collections.abc import Iterator
 from contextlib import contextmanager
 from contextvars import ContextVar
@@ -16,8 +13,6 @@ from app.retrieval.fusion import reciprocal_rank_fusion
 from app.retrieval.vector import VectorRetriever
 from app.schemas.retrieval import RetrievedChunk
 
-logger = logging.getLogger(__name__)
-
 
 @dataclass(frozen=True)
 class RetrievalSnapshot:
@@ -28,11 +23,6 @@ class RetrievalSnapshot:
 
 
 class HybridRetriever:
-    """BM25 + dense search, fused with RRF.
-
-    Each retriever is allowed to fail independently. If both fail, raise.
-    """
-
     def __init__(
         self,
         bm25: BM25Retriever,
@@ -41,9 +31,9 @@ class HybridRetriever:
         rrf_k: int,
         cache: RetrievalCache | None = None,
     ) -> None:
-        self._snapshot = RetrievalSnapshot(bm25, vector, cache)
-        self._pinned: ContextVar[RetrievalSnapshot | None] = ContextVar(
-            "knowledge_snapshot", default=None
+        self._current = RetrievalSnapshot(bm25, vector, cache)
+        self._read_view: ContextVar[RetrievalSnapshot | None] = ContextVar(
+            "retrieval_read_view", default=None
         )
         self._rrf_k = rrf_k
 
@@ -54,63 +44,48 @@ class HybridRetriever:
         cache: RetrievalCache | None,
         version: str,
     ) -> None:
-        self._snapshot = RetrievalSnapshot(bm25, vector, cache, version)
+        self._current = RetrievalSnapshot(bm25, vector, cache, version)
 
     @property
     def knowledge_version(self) -> str:
-        return (self._pinned.get() or self._snapshot).version
+        return (self._read_view.get() or self._current).version
 
     @property
     def published_version(self) -> str:
-        return self._snapshot.version
+        return self._current.version
 
     @contextmanager
     def pin_snapshot(self) -> Iterator[None]:
-        """Pin all rewrites, hops and tool retrievals in one graph execution."""
-        token = self._pinned.set(self._pinned.get() or self._snapshot)
+        pinned = self._read_view.get()
+        binding = self._read_view.set(pinned if pinned is not None else self._current)
         try:
             yield
         finally:
-            self._pinned.reset(token)
+            self._read_view.reset(binding)
 
     async def retrieve(self, query: str, *, top_k: int) -> list[RetrievedChunk]:
-        snapshot = self._pinned.get() or self._snapshot
-        if snapshot.cache is not None:
-            cached = await snapshot.cache.get(query, top_k)
+        if top_k < 1:
+            raise ValueError("top_k must be positive")
+        view = self._read_view.get() or self._current
+        if view.cache is not None:
+            cached = await view.cache.get(query, top_k)
             if cached is not None:
                 return cached
-        started = time.perf_counter()
-        lexical: list[RetrievedChunk] = []
-        dense: list[RetrievedChunk] = []
-        lexical_error: Exception | None = None
-        dense_error: Exception | None = None
-        try:
-            lexical = snapshot.bm25.search(query, top_k=top_k)
-        except Exception as exc:  # BM25 is in-process; unexpected errors still isolated
-            lexical_error = exc
-            logger.exception("bm25_failed")
-        try:
-            dense = await snapshot.vector.search(query, top_k=top_k)
-        except Exception as exc:
-            dense_error = exc
-            logger.exception("vector_search_failed")
-        if not lexical and not dense and (lexical_error or dense_error):
-            raise RetrievalError("both lexical and dense retrievers failed") from (
-                dense_error or lexical_error
-            )
-        fused = reciprocal_rank_fusion([lexical, dense], k=self._rrf_k)
-        elapsed_ms = (time.perf_counter() - started) * 1000
-        logger.info(
-            "hybrid_retrieval_completed",
-            extra={
-                "top_k": top_k,
-                "lexical": len(lexical),
-                "dense": len(dense),
-                "fused": len(fused),
-                "latency_ms": round(elapsed_ms, 2),
-            },
+        results = await asyncio.gather(
+            asyncio.to_thread(view.bm25.search, query, top_k=top_k),
+            view.vector.search(query, top_k=top_k),
+            return_exceptions=True,
         )
-        trimmed = fused[:top_k]
-        if snapshot.cache is not None:
-            await snapshot.cache.set(query, top_k, trimmed)
-        return trimmed
+        usable: list[list[RetrievedChunk]] = []
+        failed = 0
+        for result in results:
+            if isinstance(result, BaseException):
+                failed += 1
+            else:
+                usable.append(result)
+        if not any(usable) and failed:
+            raise RetrievalError("当前知识检索无法取得结果。")
+        merged = reciprocal_rank_fusion(usable, k=self._rrf_k)[:top_k]
+        if view.cache is not None:
+            await view.cache.set(query, top_k, merged)
+        return merged

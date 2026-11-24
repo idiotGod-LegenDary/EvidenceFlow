@@ -170,7 +170,7 @@ async def test_inflight_read_and_late_cache_writer_cannot_pollute_new_snapshot(
     write(tmp_path, "faq.md", "旧证据。")
     kb = runtime(tmp_path)
     old = await kb.reload()
-    old_vector = kb.retriever._snapshot.vector
+    old_vector = kb.retriever._current.vector
     original_search = old_vector.search
     entered, release = asyncio.Event(), asyncio.Event()
 

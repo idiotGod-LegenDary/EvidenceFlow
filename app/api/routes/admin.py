@@ -7,8 +7,8 @@ from fastapi import APIRouter, Depends, Request
 from app.api.dependencies import get_container
 from app.core.exceptions import InvalidRequestError, UnauthorizedError
 from app.retrieval.knowledge import KnowledgeBuildReport
+from app.runtime.routing import operation_specs
 from app.services.container import AppContainer
-from app.skills.loader import load_skills
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -32,7 +32,7 @@ async def list_tools(container: AppContainer = Depends(get_container)) -> dict:
 
 @router.get("/skills", dependencies=[Depends(require_admin)])
 async def list_skills() -> dict:
-    return {"skills": load_skills()}
+    return {"skills": operation_specs()}
 
 
 @router.get(

@@ -17,11 +17,7 @@ _INJECTION_PATTERNS = (
 
 
 def detect_prompt_injection(text: str) -> None:
-    """User text is untrusted. Retrieved docs are also untrusted — caller decides.
-
-    We block obvious jailbreaks at the query boundary. Subtle cases are handled
-    by isolating retrieved content behind UNTRUSTED_CONTEXT_BANNER.
-    """
+    """Reject known injection patterns at the user-input boundary."""
     for pattern in _INJECTION_PATTERNS:
         if pattern.search(text):
             raise GuardrailError(

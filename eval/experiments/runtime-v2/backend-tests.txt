@@ -1,0 +1,83 @@
+........................................................................ [ 34%]
+........................................................................ [ 68%]
+.................................................................        [100%]
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.10-final-0 _______________
+
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+app\api\routes\admin.py                     34      4    88%
+app\api\routes\health.py                    48     20    58%
+app\asgi.py                                  2      2     0%
+app\business\dialogue.py                    82      2    98%
+app\business\orders.py                      65      1    98%
+app\cli\__main__.py                          3      3     0%
+app\cli\client.py                          166    141    15%
+app\cli\commands.py                         24     16    33%
+app\cli\render.py                           47     17    64%
+app\config\settings.py                      86      1    99%
+app\core\exceptions.py                      48      4    92%
+app\core\request_scope.py                   18      1    94%
+app\core\retry.py                           37      8    78%
+app\guardrails\boundary.py                  11      2    82%
+app\infra\rate_limit.py                     46     19    59%
+app\infra\redis_client.py                   15      8    47%
+app\main.py                                 81      8    90%
+app\mcp\adapter.py                          31      1    97%
+app\mcp\runtime.py                          24     14    42%
+app\observability\logging.py                27      2    93%
+app\observability\trace.py                  72      4    94%
+app\providers\deepseek.py                   99     47    53%
+app\providers\device.py                     14     12    14%
+app\providers\embeddings.py                156     62    60%
+app\providers\fake.py                       25      5    80%
+app\providers\json_parser.py                41     13    68%
+app\providers\reranker.py                   80     23    71%
+app\repositories\db.py                      27      7    74%
+app\repositories\idempotency.py             22      5    77%
+app\repositories\order_repository.py       100     34    66%
+app\repositories\session_repository.py      32      4    88%
+app\retrieval\bm25.py                       34      4    88%
+app\retrieval\cache.py                      62      1    98%
+app\retrieval\chunking.py                   59     10    83%
+app\retrieval\cleaning.py                   70      2    97%
+app\retrieval\fusion.py                     20      1    95%
+app\retrieval\hybrid.py                     59      3    95%
+app\retrieval\ingest.py                     64     17    73%
+app\retrieval\knowledge.py                 127      3    98%
+app\retrieval\policy.py                      7      1    86%
+app\retrieval\reranker.py                   19      1    95%
+app\retrieval\unstructured_parser.py       160     28    82%
+app\retrieval\vector.py                     96     30    69%
+app\runtime\coordinator.py                  91      4    96%
+app\runtime\dispatch.py                     25      2    92%
+app\runtime\evidence.py                     58     10    83%
+app\runtime\planning.py                     74      7    91%
+app\runtime\routing.py                      32      5    84%
+app\services\case_service.py               190      5    97%
+app\services\chat_service.py                76      4    95%
+app\services\container.py                   77      4    95%
+app\tools\aftersale_tools.py                46      3    93%
+app\tools\base.py                           43      4    91%
+app\tools\deps.py                           18      3    83%
+app\tools\knowledge_tools.py                45      5    89%
+app\tools\logistics_tools.py                23      9    61%
+app\tools\order_tools.py                    23      2    91%
+app\tools\product_tools.py                  50     13    74%
+app\tools\registry.py                       24      3    88%
+eval\audit_runtime.py                       46     46     0%
+eval\compare_service_runs.py                39     39     0%
+eval\knowledge_lifecycle.py                 87     87     0%
+eval\p0_compare.py                          87     66    24%
+eval\p0_dataset.py                          44     13    70%
+eval\p0_runner.py                          141     55    61%
+eval\replay_p0.py                           38     38     0%
+eval\runner.py                               3      3     0%
+eval\service_benchmark.py                  232     50    78%
+eval\service_dataset.py                     47     10    79%
+------------------------------------------------------------
+TOTAL                                     4690   1081    77%
+
+46 files skipped due to complete coverage.
+Required test coverage of 70% reached. Total coverage: 76.95%
+209 passed in 87.62s (0:01:27)

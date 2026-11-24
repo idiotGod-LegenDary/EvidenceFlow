@@ -1,3 +1,3 @@
-"""Adaptive-RAG multi-agent e-commerce customer service."""
+"""EvidenceFlow after-sales runtime."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

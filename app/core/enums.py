@@ -27,14 +27,7 @@ class IntentLabel(str, Enum):
 
 
 class RetrievalStrategy(str, Enum):
-    """Adaptive-RAG routing targets.
-
-    DIRECT: parametric / greeting answers, no retrieval.
-    SINGLE: one-shot hybrid retrieval.
-    MULTI: Self-RAG iterative retrieval for multi-hop questions.
-    AGENT: planner + tools, optionally with retrieval.
-    REFUSE: query boundary / policy refusal.
-    """
+    """Response strategy identifiers, including values used by archived clients."""
 
     DIRECT = "direct"
     SINGLE = "single"

@@ -2,7 +2,7 @@
 
 ## 依赖管理
 
-依赖的唯一来源是 `pyproject.toml`：运行时依赖写在 `[project.dependencies]`，可选组写在 `[project.optional-dependencies]`（`dev`、`rerank`、`docs`）。仓库不再维护单独的 `requirements.txt`，避免两份版本清单漂移。
+依赖的唯一来源是 `pyproject.toml`：运行时依赖写在 `[project.dependencies]`，可选组包括 `dev`、`rerank`、`docs` 和仅供旧快照重放的 `legacy-eval`。
 
 `uv.lock` 是提交进仓库的锁定版本清单，用于复现完整依赖树。CI 会跑 `uv lock --check`，一旦它与 `pyproject.toml` 不同步就会失败。
 
@@ -13,6 +13,7 @@ uv lock --check              # 改过 pyproject 后校验锁文件是否同步
 pip install -e ".[dev]"      # 开发（含 pytest、ruff、mypy）
 pip install -e ".[rerank]"   # 本地 bge 召回 + Cross-Encoder 精排
 pip install -e ".[docs]"     # Unstructured 解析 PDF/Office/HTML/图片
+pip install -e ".[dev,legacy-eval]" # 历史图运行时与 P0 快照重放
 ```
 
 ## 代码规范

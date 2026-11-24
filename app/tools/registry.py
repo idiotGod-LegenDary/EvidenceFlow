@@ -1,6 +1,6 @@
-"""Tool registry and dispatch."""
-
 from __future__ import annotations
+
+import re
 
 from app.core.exceptions import InvalidRequestError
 from app.tools.base import Tool
@@ -8,22 +8,26 @@ from app.tools.base import Tool
 
 class ToolRegistry:
     def __init__(self) -> None:
-        self._tools: dict[str, Tool] = {}
+        self._catalog: dict[str, Tool] = {}
 
     def register(self, tool: Tool) -> None:
-        self._tools[tool.name] = tool
+        if not re.fullmatch(r"[a-z][a-z0-9_]*", tool.name):
+            raise ValueError("Invalid tool identifier")
+        if tool.name in self._catalog:
+            raise ValueError(f"Duplicate tool registration: {tool.name}")
+        self._catalog[tool.name] = tool
 
     def get(self, name: str) -> Tool:
-        try:
-            return self._tools[name]
-        except KeyError as exc:
-            raise InvalidRequestError(f"unknown tool: {name}") from exc
-
-    def all(self) -> list[Tool]:
-        return list(self._tools.values())
-
-    def openai_tools(self) -> list[dict]:
-        return [tool.openai_schema() for tool in self._tools.values()]
+        found = self._catalog.get(name)
+        if found is None:
+            raise InvalidRequestError(f"未注册的工具：{name}")
+        return found
 
     def names(self) -> list[str]:
-        return list(self._tools)
+        return list(self._catalog.keys())
+
+    def all(self) -> list[Tool]:
+        return [self._catalog[name] for name in self.names()]
+
+    def openai_tools(self) -> list[dict]:
+        return [entry.openai_schema() for entry in self.all()]

@@ -1,5 +1,4 @@
 import copy
-import hashlib
 import json
 
 import pytest
@@ -50,37 +49,6 @@ def test_policy_acknowledgement_can_be_followed_by_explicit_application():
     assert not response and query == "取消订单 ORD10003"
     _, _, response = resolve_turn("规则已经了解；别帮我取消这笔", slots)
     assert response
-
-
-@pytest.mark.asyncio
-async def test_order_specific_policy_plan_always_includes_evidence_lookup():
-    from app.agents.nodes.planner import Planner, planner_node
-    from app.providers.fake import FakeLLMProvider
-    from app.tools.aftersale_tools import CancelOrderTool
-    from app.tools.knowledge_tools import SearchKnowledgeTool
-    from app.tools.order_tools import GetOrderTool
-    from app.tools.registry import ToolRegistry
-
-    registry = ToolRegistry()
-    registry.register(CancelOrderTool())
-    registry.register(GetOrderTool())
-    registry.register(SearchKnowledgeTool(None))
-    payload = {
-        "steps": [
-            {
-                "step_id": 1,
-                "goal": "查订单",
-                "tool_name": "get_order",
-                "arguments": {"order_id": "ORD10003"},
-            }
-        ]
-    }
-    result = await planner_node(
-        {"user_query": "订单 ORD10003 的取消条件是什么？"},
-        Planner(FakeLLMProvider(canned={"": json.dumps(payload)}), registry),
-    )
-    assert result["pending_action"] is None
-    assert result["plan"].steps[0].tool_name == "search_knowledge"
 
 
 def test_frozen_assets_are_unchanged_and_new_queries_do_not_overlap_old_dataset():
@@ -147,33 +115,3 @@ async def test_evaluator_confirms_wrong_proposal_and_observes_actual_wrong_execu
     turn = result["turns"][0]
     assert turn["before"] == turn["before_confirm"]
     assert turn["after"]["orders"]["ORD10003"]["status"] == "cancelled"
-
-
-@pytest.mark.asyncio
-async def test_uncited_model_claim_is_replaced_with_actual_evidence():
-    from app.agents.nodes.generate import generate_node
-    from app.providers.fake import FakeLLMProvider
-    from app.schemas.retrieval import RetrievedChunk
-
-    text = "普通商品签收后可提交退货申请。"
-    chunk = RetrievedChunk(
-        chunk_id="verified",
-        document_id="returns",
-        title="退货规定",
-        content=text,
-        score=1,
-        content_sha256=hashlib.sha256(text.encode()).hexdigest(),
-        knowledge_version="frozen",
-    )
-    provider = FakeLLMProvider(
-        canned={
-            "": json.dumps(
-                {"answer": "定制商品肯定能退，保证退款到账。", "citation_chunk_ids": ["invented"]}
-            )
-        }
-    )
-    result = await generate_node(
-        {"user_query": "退货规则是什么？", "retrieved_chunks": [chunk]}, provider
-    )
-    assert "肯定能退" not in result["final_answer"] and text in result["final_answer"]
-    assert result["citations"][0].chunk_id == "verified"

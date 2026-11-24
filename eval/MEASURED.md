@@ -1,6 +1,6 @@
 # 实测数字（2026-08-22）
 
-完整测评报告（数据集、消融、口径）：[`docs/14-evaluation-report.md`](../docs/14-evaluation-report.md)。
+这是历史组件版本的测量摘录，不对应 EvidenceFlow 0.2。旧运行器的 `--task` 接口已退役；历史报告见 [0.1 文档归档](https://github.com/idiotGod-LegenDary/EvidenceFlow/blob/da4573f/docs/14-evaluation-report.md)。当前验证见 [0.2 记录](experiments/RUNTIME_V2.md)。
 
 命令：`HF_HUB_OFFLINE=1 python -m eval.runner --task all --llm`  
 模型：DeepSeek `deepseek-chat`（API 上的 DeepSeek-V3）  
@@ -11,7 +11,7 @@
 
 上一轮 hash 对照（同日更早，报告标识 `all_20260822T042748Z.json`，同样不入库）：仅向量 Hit@1 **3.1%**。本轮已换成 small，不再把 Hybrid 当成 hash。
 
-## 可以直接写进简历的
+## 历史指标摘录
 
 - 100 条意图：关键词规则 51% → 无覆盖 `intent_v1` 85% / `intent_v2` 86% → `intent_v3`+歧义覆盖 **100%**（≥97%）
 - 65 条政策检索 / 39 篇文档：BM25 **Precision@1 76.9%**、**Recall@3 90.0%**、MRR **0.84**

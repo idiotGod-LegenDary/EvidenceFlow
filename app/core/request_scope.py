@@ -1,10 +1,4 @@
-"""Request-scoped resources via contextvars.
-
-LangGraph is compiled once at process start. Tools still need the current
-SQLAlchemy session; storing the session on the compiled graph would leak
-connections across requests. Contextvars keep the binding request-local
-and async-safe.
-"""
+"""Bind the transaction session to the current asynchronous request."""
 
 from __future__ import annotations
 

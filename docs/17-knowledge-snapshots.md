@@ -66,7 +66,7 @@ Invoke-RestMethod -Method Post http://127.0.0.1:8002/api/v1/admin/knowledge/relo
 - 知识内容、历史缓存和旧请求都可能同时驻留内存；大库需要内存预算。Qdrant 旧版本集合没有自动 GC，生产使用前需增加保留策略。
 - 两次扫描能发现通常的并发文件修改，但不提供文件系统事务；管理员应先完成写文件，再触发发布。构建期间不得原地改写 Qdrant 已发布集合。
 - Provider 的模型名相同而远端权重被替换时无法自动识别；需要固定模型修订版本并重建 Runtime。
-- 仍存在上游的用户身份未认证等限制，见 [12-limitations.md](12-limitations.md)。面向真实用户部署前仍需补齐这些能力。
+- 当前身份由客户端声明，部署范围见 [运行边界](../README.md#运行边界)。面向真实用户部署前仍需补齐认证能力。
 - HashEmbedding 实验只验证计算量和证据一致性，不能得出语义检索准确率、真实模型加速比或幻觉率结论。
 
 实验入口：`python -m eval.knowledge_lifecycle --repeats 3`；结果与原始记录见 [本地报告](../eval/experiments/KNOWLEDGE_LIFECYCLE.md)。

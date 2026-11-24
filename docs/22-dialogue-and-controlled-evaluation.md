@@ -1,5 +1,7 @@
 # 澄清、引用与版本对照
 
+本文记录 0.1 版本的 P0 设计与冻结实验。对话槽位仍在当前版本使用；图节点、忠实度检查和旧规划链已经退役，当前实现见 [请求运行时](23-runtime.md)。复现旧快照前安装 `python -m pip install -e ".[dev,legacy-eval]"`。
+
 ## 对话状态
 
 `dialogue_states` 按会话保存待处理操作、候选订单、已选择订单、原因和阶段。阶段为 `idle`、`awaiting_order` 或 `awaiting_selection`。更新与本次聊天记录使用同一个数据库事务；会话归属仍通过现有 SessionRepository 校验。
